@@ -1,8 +1,8 @@
 const merge = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const getCssLoaderOption = require('./css-loader-option');
 const config = require('./webpack.base.config');
-const loaders = require('./loaders');
 
 module.exports = merge(config, {
   output: {
@@ -15,7 +15,9 @@ module.exports = merge(config, {
       {
         test: /\.css$/,
         use: [
-          'style-loader',
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
           {
             loader: 'css-loader',
             options: getCssLoaderOption(true),
@@ -40,12 +42,6 @@ module.exports = merge(config, {
         parallel: 4,
         sourceMap: true
       }),
-      new OptimizeCSSAssetsPlugin({}),
-    ],
-  },
-  module: {
-    rules: [
-      loaders.prod.style,
     ],
   },
   plugins: [
