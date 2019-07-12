@@ -1,8 +1,6 @@
-const path = require('path');
 const merge = require('webpack-merge');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
+const getCssLoaderOption = require('./css-loader-option');
 const config = require('./webpack.base.config');
 const loaders = require('./loaders');
 
@@ -12,6 +10,20 @@ module.exports = merge(config, {
     chunkFilename: 'static/js/[name].[chunkhash:8].js',
   },
   mode: 'production',
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: getCssLoaderOption(true),
+          },
+        ],
+      }
+    ]
+  },
   optimization: {
     splitChunks: {
       cacheGroups: {
@@ -28,19 +40,15 @@ module.exports = merge(config, {
         parallel: 4,
         sourceMap: true
       }),
-      new OptimizeCSSAssetsPlugin({})
-    ]
+      new OptimizeCSSAssetsPlugin({}),
+    ],
   },
   module: {
     rules: [
-      loaders.prod.style
-    ]
+      loaders.prod.style,
+    ],
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: 'index.html'
-    }),
-    ...config.plugins,
     new MiniCssExtractPlugin({
       filename: "static/css/[name].[chunkhash:8].css",
       chunkFilename: "static/css/[name].[chunkhash:8].css"
