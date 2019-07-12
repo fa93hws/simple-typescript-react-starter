@@ -18,21 +18,6 @@ module.exports = {
       {
         test: /\.(ts|tsx)$/,
         loader: 'awesome-typescript-loader'
-      },
-      {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              modules: {
-                mode: 'local',
-                context: path.resolve(__dirname, '../', 'src'),
-                localIdentName: '[path][name]__[local]',
-              },
-            },
-          }]
       }
     ]
   },
