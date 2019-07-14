@@ -15,16 +15,3 @@ module.exports = function(hashOutput) {
     sourceMap: true,
   };
 }
-
-// module.exports = function(hashOutput) {
-//   const localIdentName = hashOutput
-//     ? '[hash:base64]'
-//     : '[path][name]__[local]'
-//   return {
-//     modules: true,
-//     localIdentName,
-//     sourceMap: true,
-//     camelCase: 'only',
-//     importLoaders: 0,
-//   };
-// }
