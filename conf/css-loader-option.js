@@ -14,5 +14,4 @@ module.exports = function(hashOutput) {
     importLoaders: 0,
     sourceMap: true,
   };
-;
 }

@@ -16,8 +16,11 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(ts|tsx)$/,
-        loader: 'awesome-typescript-loader'
+        test: /\.(ts|tsx|css)$/,
+        loader: 'ts-loader',
+        options: {
+          appendTsSuffixTo: [/\.css$/],
+        },
       }
     ]
   },
