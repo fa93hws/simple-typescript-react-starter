@@ -1,10 +1,11 @@
-const merge = require('webpack-merge');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
-const getCssLoaderOption = require('./css-loader-option');
-const config = require('./webpack.base.config');
+import { Configuration } from 'webpack';
+import * as merge from 'webpack-merge';
+import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import * as TerserPlugin from 'terser-webpack-plugin';
+import { getCssLoaderOption } from './css-loader-option';
+import { baseConfig } from './webpack.base.config';
 
-module.exports = merge(config, {
+const prodConfiguration: Configuration = merge(baseConfig, {
   output: {
     filename: "static/js/[name].[chunkhash:8].js",
     chunkFilename: 'static/js/[name].[chunkhash:8].js',
@@ -15,6 +16,7 @@ module.exports = merge(config, {
       {
         test: /\.css$/,
         use: [
+          './conf/css-module-types-loader',
           {
             loader: MiniCssExtractPlugin.loader,
           },
@@ -51,3 +53,5 @@ module.exports = merge(config, {
     }),
   ]
 });
+
+export default prodConfiguration;
