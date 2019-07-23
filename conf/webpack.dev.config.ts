@@ -1,9 +1,10 @@
-const merge = require('webpack-merge');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const config = require('./webpack.base.config');
-const getCssLoaderOption = require('./css-loader-option');
+import { Configuration } from 'webpack';
+import * as merge from 'webpack-merge';
+import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import { getCssLoaderOption } from './css-loader-option';
+import { baseConfig } from './webpack.base.config';
 
-module.exports = merge(config, {
+const devConfiguration: Configuration = merge(baseConfig, {
   output: {
     filename: "static/js/[name].js",
     chunkFilename: 'static/js/[name].js',
@@ -38,4 +39,6 @@ module.exports = merge(config, {
       chunkFilename: "static/css/[name].css"
     }),
   ]
-})
+});
+
+export default devConfiguration;

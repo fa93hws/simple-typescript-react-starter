@@ -1,13 +1,13 @@
-const path = require('path');
+import { resolve } from 'path';
 
-module.exports = function(hashOutput) {
+export function getCssLoaderOption(hashOutput: boolean) {
   const localIdentName = hashOutput
     ? '[hash:base64]'
     : '[path][name]__[local]'
   return {
     modules: {
       mode: 'local',
-      context: path.resolve(__dirname, '../src'),
+      context: resolve(__dirname, '../src'),
       localIdentName,
     },
     localsConvention: 'camelCaseOnly',

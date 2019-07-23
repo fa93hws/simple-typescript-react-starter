@@ -1,16 +1,17 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+import { Configuration } from 'webpack';
+import { join, resolve } from 'path';
+import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 
-module.exports = {
+export const baseConfig: Configuration = {
   entry: "./src/index.tsx",
   output: {
-    path: path.resolve(__dirname, '../dist/'),
+    path: resolve(__dirname, '../dist/'),
     publicPath: '/'
   },
   resolve: {
     extensions: ['.js', '.ts', '.tsx'],
     alias: {
-      '@': path.join(__dirname, '../src'),
+      '@': join(__dirname, '../src'),
     },
   },
   module: {
