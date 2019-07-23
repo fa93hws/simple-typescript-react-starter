@@ -16,7 +16,7 @@ const prodConfiguration: Configuration = merge(baseConfig, {
       {
         test: /\.css$/,
         use: [
-          './conf/css-module-types-loader',
+          './conf/css-module-types-loader.ts',
           {
             loader: MiniCssExtractPlugin.loader,
           },
